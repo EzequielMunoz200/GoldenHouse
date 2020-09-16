@@ -7,6 +7,7 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
@@ -15,6 +16,16 @@
 </head>
 
 <body>
+    <nav>
+        <div class="nav-wrapper light-blue darken-4">
+          <a href="#!" class="brand-logo center">Golde House Real State </a>
+          <ul class="left hide-on-med-and-down">
+            <li><a href="">Sass</a></li>
+            <li><a href="">Components</a></li>
+            <li class="active"><a href="">JavaScript</a></li>
+          </ul>
+        </div>
+      </nav>
     {% block body %}{% endblock %}
     {% block javascripts %}
     <!-- Compiled and minified JavaScript -->

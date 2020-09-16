@@ -3,7 +3,141 @@
 {% block title %}Property{% endblock %}
 
 {% block body %}
-    <h1>Property</h1>
+<div class="row">
+    <div class="card-panel teal lighten-4">
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col m6"></div>
+                    <div class="col s12 m6">
+                        <h1>{{property.title}}</h1>
+                        <h2>{{property.rooms}} pièces - {{property.surface}} m²</h2>
+                        <h2>{{property.formattedPrice}} €</h2>
+                        <a href="{{ path('property_show', {id: property.id, slug: property.slug}) }}"
+                            class="waves-effect waves-light btn"><i class="material-icons left">phone</i>Contacter
+                            l'agence</a>
+                        {# <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                                        class="material-icons">add</i></a> #}
+
+                      {#   <div class="card-content">
+                            <p>{{ property.city }} ({{ property.postalCode }})</p>
+                            <div class="teal-text">{{ property.formattedPrice }} €</div>
+                        </div> #}
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="container">
+    <!-- Page Content goes here -->
+
+
+
+    <div class="collection">
+        <p class="collection-item">{{ property.description | nl2br}}</p>
+        <a href="#!" class="collection-item active">Alvin</a>
+        <a href="#!" class="collection-item">Alvin</a>
+        <a href="#!" class="collection-item">Alvin</a>
+    </div>
+    <div class="row">
+        <div class="col l6">
+            <h2>Caractéristiques</h2>
+            <table class="table striped">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ property.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Title</th>
+                        <td>{{ property.title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ property.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Surface habitable</th>
+                        <td>{{ property.surface }}</td>
+                    </tr>
+                    <tr>
+                        <th>Pièces</th>
+                        <td>{{ property.rooms }}</td>
+                    </tr>
+                    <tr>
+                        <th>Chambres</th>
+                        <td>{{ property.bedrooms }}</td>
+                    </tr>
+                    <tr>
+                        <th>Étage</th>
+                        <td>{{ property.floor }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prix</th>
+                        <td>{{ property.price }}</td>
+                    </tr>
+                    <tr>
+                        <th>Chauffage</th>
+                        <td>{{ property.heatType }}</td>
+                    </tr>
+                    <tr>
+                        <th>Ville</th>
+                        <td>{{ property.city }}</td>
+                    </tr>
+                    <tr>
+                        <th>Adresse</th>
+                        <td>{{ property.address }}</td>
+                    </tr>
+                    <tr>
+                        <th>Code postal</th>
+                        <td>{{ property.postalCode }}</td>
+                    </tr>
+                    <tr>
+                        <th>Is_sold</th>
+                        <td>{{ property.isSold ? 'Yes' : 'No' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Created_at</th>
+                        <td>{{ property.createdAt ? property.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Updated_at</th>
+                        <td>{{ property.updatedAt ? property.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col l6">
+            <h2>Spécifités</h2>
+            <table class="table striped">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ property.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Title</th>
+                        <td>{{ property.title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ property.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Surface habitable</th>
+                        <td>{{ property.surface }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {#  <h1>Property</h1>
 
     <table class="table">
         <tbody>
@@ -74,5 +208,5 @@
 
     <a href="{{ path('property_edit', {'id': property.id}) }}">edit</a>
 
-    {{ include('property/_delete_form.html.twig') }}
-{% endblock %}
+    {{ include('property/_delete_form.html.twig') }} #}
+    {% endblock %}

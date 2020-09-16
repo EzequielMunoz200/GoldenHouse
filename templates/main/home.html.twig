@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block body %}
+
+<div class="row">
+      <div class="card-panel teal darken-3">
+        <h1 class="center-align white-text">Propriétés de luxe
+        </h1>
+        <p class="center-align white-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, delectus temporibus, commodi natus aut perspiciatis reiciendis sapiente praesentium ad, quibusdam perferendis id ullam repellat tenetur quasi reprehenderit adipisci ipsum aperiam.</p>
+      </div>
+  </div>
+
+<div class="container">
+    <!-- Page Content goes here -->
+
+    <h2>Les derniers biens</h2>
+
+    <div class="row">
+        {% for property in properties %}
+
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/sample-1.jpg">
+                    <span class="card-title"><a href="{{ path('property_show', {id: property.id, slug: property.slug}) }}">{{ property.title }}</a></span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                            class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>{{ property.city }} ({{ property.postalCode }})</p>
+                    <div class="teal-text">{{ property.formattedPrice }} €</div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+    {% endblock %}

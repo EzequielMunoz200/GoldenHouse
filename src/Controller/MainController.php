@@ -13,7 +13,7 @@ class MainController extends AbstractController
      */
     public function home(PropertyRepository $propertyRepository)
     {
-        return $this->render('property/index.html.twig', [
+        return $this->render('main/home.html.twig', [
             'properties' => $propertyRepository->findLatest(),
         ]);
     }

@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PropertyController extends AbstractController
 {
     /**
-     * @Route("/", name="property_index", methods={"GET"})
+     * @Route("/biens", name="property_index", methods={"GET"})
      */
     public function index(PropertyRepository $propertyRepository): Response
     {
@@ -49,10 +49,17 @@ class PropertyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="property_show", methods={"GET"})
+     * @Route("/biens/{slug}-{id}", name="property_show", requirements={"slug": "[a-z0-9\-]*"}, methods={"GET"})
      */
-    public function show(Property $property): Response
+    public function show(Property $property, $slug, $id): Response
     {
+        $propSlug = $property->getSlug();
+        if ($propSlug !== $slug) {
+            return $this->redirectToRoute('property_show', [
+                'id' => $property->getId(),
+                'slug' => $propSlug,
+            ], 301);
+        }
         return $this->render('property/show.html.twig', [
             'property' => $property,
         ]);
@@ -83,7 +90,7 @@ class PropertyController extends AbstractController
      */
     public function delete(Request $request, Property $property): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$property->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $property->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($property);
             $entityManager->flush();
