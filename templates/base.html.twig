@@ -38,20 +38,20 @@
     {% endfor %}
     <nav class="nav-extended">
         <div class="nav-wrapper light-blue darken-4">
-            <a href="#!" class="brand-logo right">Golden House Real State </a>
+            <a href="{{path('home')}}" class="brand-logo right">Golden House Real State </a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
-                <li><a href="">Sass</a></li>
-                <li><a href="">Components</a></li>
-                <li class="active"><a href="">JavaScript</a></li>
+                <li><a href="{{path('admin_property_index')}}">Tous les biens</a></li>
+                <li><a href="{# {{path('app_login')}} #}">Login</a></li>
+                <li class="active"><a href="{# {{path('app_logout')}} #}">Logout</a></li>
             </ul>
         </div>
     </nav>
 
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">JavaScript</a></li>
+        <li><a href="{{path('admin_property_index')}}">Tous les biens</a></li>
+        <li><a href="{# {{path('app_login')}} #}">Login</a></li>
+        <li><a href="{# {{path('app_logout')}} #}">Logout</a></li>
     </ul>
     {% block body %}{% endblock %}
     {% block javascripts %}
