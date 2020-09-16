@@ -14,8 +14,8 @@ class Property
 {
 
     const HEAT = [
-        0 => 'Électrique',
-        1 => 'Gaz'
+        0 => 'Electric',
+        1 => 'Gas'
     ];
 
     /**
@@ -95,7 +95,7 @@ class Property
      */
     private $updated_at;
 
-    public function __construct($is_sold)
+    public function __construct()
     {
         $this->created_at = new \DateTime();
     }

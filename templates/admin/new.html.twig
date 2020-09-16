@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}} - Ajouter un bien{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un nouveau bien</h1>
+
+    {{ include('admin/_form.html.twig') }}
+
+    <a href="{{ path('admin_property_index') }}">back to list</a>
+{% endblock %}
