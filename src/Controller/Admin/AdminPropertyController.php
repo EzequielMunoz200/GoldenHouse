@@ -26,7 +26,7 @@ class AdminPropertyController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="property_new", methods={"GET","POST"})
+     * @Route("/property/new", name="property_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -39,7 +39,9 @@ class AdminPropertyController extends AbstractController
             $entityManager->persist($property);
             $entityManager->flush();
 
-            return $this->redirectToRoute('property_index');
+            $this->addFlash('success', 'Bien ajouté avec success');
+
+            return $this->redirectToRoute('admin_property_index');
         }
 
         return $this->render('admin/new.html.twig', [
@@ -66,7 +68,7 @@ class AdminPropertyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="property_edit", methods={"GET","POST"})
+     * @Route("/property/{slug}-{id}/edit", name="property_edit", requirements={"slug": "[a-z0-9\-]*"}, methods={"GET","POST"})
      */
     public function edit(Request $request, Property $property): Response
     {
@@ -76,7 +78,9 @@ class AdminPropertyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('property_index');
+            $this->addFlash('success', 'Bien modifié avec success');
+
+            return $this->redirectToRoute('admin_property_index');
         }
 
         return $this->render('admin/edit.html.twig', [
@@ -94,8 +98,10 @@ class AdminPropertyController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($property);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Bien supprimé avec success');
         }
 
-        return $this->redirectToRoute('property_index');
+        return $this->redirectToRoute('admin_property_index');
     }
 }

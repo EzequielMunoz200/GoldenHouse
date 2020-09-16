@@ -8,14 +8,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;300;400;700&display=swap" rel="stylesheet">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     {% endblock %}
 </head>
+<style>
+    .error{
+        color: white;
+        font-weight: bold;
+        background-color: rgb(194, 30, 30);
+        padding: 5px;
+        border-radius: 5px;
+        display: inline-block;
+    }
 
-<body>
+    body{
+        font-family: 'Roboto Slab', serif;
+    }
+</style>
+
+{# read and display all flash messages #}
+{% for label, messages in app.flashes %}
+{% for message in messages %}
+<body onload="M.toast({html: '{{message}}', classes: '{{label}}'})">
+    {% endfor %}
+    {% endfor %}
     <nav class="nav-extended">
         <div class="nav-wrapper light-blue darken-4">
             <a href="#!" class="brand-logo right">Golden House Real State </a>
@@ -27,23 +47,25 @@
             </ul>
         </div>
     </nav>
+
     <ul class="sidenav" id="mobile-demo">
         <li><a href="sass.html">Sass</a></li>
         <li><a href="badges.html">Components</a></li>
         <li><a href="collapsible.html">JavaScript</a></li>
-      </ul>
+    </ul>
     {% block body %}{% endblock %}
-    {% block javascripts %} 
+    {% block javascripts %}
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.sidenav');
             var instances = M.Sidenav.init(elems);
-          });
+        });
 
-          document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('select');
             var instances = M.FormSelect.init(elems);
-          });
+        });
+
     </script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

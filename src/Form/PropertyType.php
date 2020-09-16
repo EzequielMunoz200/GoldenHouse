@@ -4,7 +4,11 @@ namespace App\Form;
 
 use App\Entity\Property;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,19 +18,24 @@ class PropertyType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('description')
-            ->add('surface')
-            ->add('rooms')
-            ->add('bedrooms')
-            ->add('floor')
-            ->add('price')
+            ->add('description', TextareaType::class)
+            ->add('surface', NumberType::class)
+            ->add('rooms', NumberType::class)
+            ->add('bedrooms', NumberType::class)
+            ->add('floor', NumberType::class)
+            ->add('price', NumberType::class)
             ->add('heat', ChoiceType::class, [
                 'choices' => $this->getChoices()
             ])
-            ->add('city')
-            ->add('address')
-            ->add('postal_code')
-            ->add('is_sold')
+            ->add('city', TextType::class)
+            ->add('address', TextType::class)
+            ->add('postal_code', TextType::class)
+            ->add('is_sold', CheckboxType::class, [
+                'required' => false,
+                'attr' => [
+                    'validate' => 'no-validate'
+                ]
+            ])
         ;
     }
 

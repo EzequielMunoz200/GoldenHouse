@@ -3,12 +3,12 @@
 {% block title %}Property index{% endblock %}
 
 {% block body %}
-    <h1>Property index</h1>
+    <h1>Les biens en vente</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+               {#  <th>Id</th> #}
                 <th>Title</th>
                 <th>Description</th>
                 <th>Surface</th>
@@ -29,7 +29,7 @@
         <tbody>
         {% for property in properties %}
             <tr>
-                <td>{{ property.id }}</td>
+               {#  <td>{{ property.id }}</td> #}
                 <td>{{ property.title }}</td>
                 <td>{{ property.description }}</td>
                 <td>{{ property.surface }}</td>
@@ -45,8 +45,8 @@
                 <td>{{ property.createdAt ? property.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ property.updatedAt ? property.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('property_show', {'id': property.id}) }}">show</a>
-                    <a href="{{ path('property_edit', {'id': property.id}) }}">edit</a>
+                    <a href="{{ path('property_show', {'id': property.id, slug: property.slug}) }}">show</a>
+                    <a href="{{ path('admin_property_edit', {'id': property.id, slug: property.slug}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

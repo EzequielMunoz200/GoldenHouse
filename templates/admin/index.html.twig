@@ -30,7 +30,8 @@
             {% for property in properties %}
                 <tr>
                     <td>{{property.title}}</td>
-                    <td><a href="{{path('admin_property_edit', {id: property.id }) }}" class="btn">Modifier</a></td>
+                    <td><a href="{{path('admin_property_edit', {id: property.id, slug: property.slug }) }}" class="btn">Modifier</a></td>
+                    <td>{{ include('admin/_delete_form.html.twig') }}</td>
                 </tr>
             {% endfor %}
         </tbody>
