@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{parent()}} - Modifier l'option{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Modifier l'option</h1>
+
+    {{ include('admin/option/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_option_index') }}">back to list</a>
+
+    {{ include('admin/option/_delete_form.html.twig') }}
+</div>
+ 
+{% endblock %}

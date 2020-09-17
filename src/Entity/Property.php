@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PropertyRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -105,9 +107,20 @@ class Property
      */
     private $updated_at;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Option::class, inversedBy="properties")
+     */
+    private $options;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
+        $this->options = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 
     public function getId(): ?int
@@ -294,6 +307,32 @@ class Property
     public function setIsSold(bool $is_sold): self
     {
         $this->is_sold = $is_sold;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Option[]
+     */
+    public function getOptions(): Collection
+    {
+        return $this->options;
+    }
+
+    public function addOption(Option $option): self
+    {
+        if (!$this->options->contains($option)) {
+            $this->options[] = $option;
+        }
+
+        return $this;
+    }
+
+    public function removeOption(Option $option): self
+    {
+        if ($this->options->contains($option)) {
+            $this->options->removeElement($option);
+        }
 
         return $this;
     }
