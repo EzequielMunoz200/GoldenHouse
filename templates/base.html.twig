@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;300;400;700&display=swap"
+        rel="stylesheet">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
@@ -16,7 +17,7 @@
     {% endblock %}
 </head>
 <style>
-    .error{
+    .error {
         color: white;
         font-weight: bold;
         background-color: rgb(194, 30, 30);
@@ -25,7 +26,7 @@
         display: inline-block;
     }
 
-    body{
+    body {
         font-family: 'Roboto Slab', serif;
     }
 </style>
@@ -33,6 +34,7 @@
 {# read and display all flash messages #}
 {% for label, messages in app.flashes %}
 {% for message in messages %}
+
 <body onload="M.toast({html: '{{message}}', classes: '{{label}}'})">
     {% endfor %}
     {% endfor %}
@@ -43,7 +45,10 @@
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 <li><a href="{{path('admin_property_index')}}">Tous les biens</a></li>
                 <li><a href="{{path('app_login')}}">Login</a></li>
+                {% if app.user %}
                 <li class="active"><a href="{{path('app_logout')}}">Logout</a></li>
+                {% endif %}
+
             </ul>
         </div>
     </nav>
@@ -51,7 +56,9 @@
     <ul class="sidenav" id="mobile-demo">
         <li><a href="{{path('admin_property_index')}}">Tous les biens</a></li>
         <li><a href="{{path('app_login')}}">Login</a></li>
+        {% if app.user %}
         <li><a href="{{path('app_logout')}}">Logout</a></li>
+        {% endif %}
     </ul>
     {% block body %}{% endblock %}
     {% block javascripts %}
