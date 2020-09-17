@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Property{% endblock %}
+{% block title %}{{parent()}}- {{property.title}}{% endblock %}
 
 {% block body %}
 <div class="row">
@@ -27,9 +27,6 @@
 </div>
 <div class="container">
     <!-- Page Content goes here -->
-
-
-
     <div class="collection">
         <p class="collection-item">{{ property.description | nl2br}}</p>
         <a href="#!" class="collection-item active">Alvin</a>
@@ -42,63 +39,59 @@
             <table class="table striped">
                 <tbody>
                     <tr>
-                        <th>Id</th>
-                        <td>{{ property.id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Title</th>
+                        <th class="teal-text">Nom</th>
                         <td>{{ property.title }}</td>
                     </tr>
                     <tr>
-                        <th>Description</th>
+                        <th class="teal-text">Description</th>
                         <td>{{ property.description }}</td>
                     </tr>
                     <tr>
-                        <th>Surface habitable</th>
+                        <th class="teal-text">Surface habitable</th>
                         <td>{{ property.surface }}</td>
                     </tr>
                     <tr>
-                        <th>Pièces</th>
+                        <th class="teal-text">Pièces</th>
                         <td>{{ property.rooms }}</td>
                     </tr>
                     <tr>
-                        <th>Chambres</th>
+                        <th class="teal-text">Chambres</th>
                         <td>{{ property.bedrooms }}</td>
                     </tr>
                     <tr>
-                        <th>Étage</th>
+                        <th class="teal-text">Étage</th>
                         <td>{{ property.floor }}</td>
                     </tr>
                     <tr>
-                        <th>Prix</th>
+                        <th class="teal-text">Prix</th>
                         <td>{{ property.price }}</td>
                     </tr>
                     <tr>
-                        <th>Chauffage</th>
+                        <th class="teal-text">Chauffage</th>
                         <td>{{ property.heatType }}</td>
                     </tr>
                     <tr>
-                        <th>Ville</th>
+                        <th class="teal-text">Ville</th>
                         <td>{{ property.city }}</td>
                     </tr>
                     <tr>
-                        <th>Adresse</th>
+                        <th class="teal-text">Adresse</th>
                         <td>{{ property.address }}</td>
                     </tr>
                     <tr>
-                        <th>Code postal</th>
+                        <th class="teal-text">Code postal</th>
                         <td>{{ property.postalCode }}</td>
                     </tr>
                     <tr>
-                        <th>Is_sold</th>
+                        <th class="teal-text">Is_sold</th>
                         <td>{{ property.isSold ? 'Yes' : 'No' }}</td>
                     </tr>
                     <tr>
-                        <th>Created_at</th>
+                        <th class="teal-text">Created_at</th>
                         <td>{{ property.createdAt ? property.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                     </tr>
                     <tr>
-                        <th>Updated_at</th>
+                        <th class="teal-text">Updated_at</th>
                         <td>{{ property.updatedAt ? property.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                     </tr>
                 </tbody>
@@ -109,19 +102,15 @@
             <table class="table striped">
                 <tbody>
                     <tr>
-                        <th>Id</th>
-                        <td>{{ property.id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Title</th>
+                        <th class="teal-text">Title</th>
                         <td>{{ property.title }}</td>
                     </tr>
                     <tr>
-                        <th>Description</th>
+                        <th class="teal-text">Description</th>
                         <td>{{ property.description }}</td>
                     </tr>
                     <tr>
-                        <th>Surface habitable</th>
+                        <th class="teal-text">Surface habitable</th>
                         <td>{{ property.surface }}</td>
                     </tr>
 

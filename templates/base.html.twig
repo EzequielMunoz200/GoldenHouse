@@ -43,7 +43,7 @@
             <a href="{{path('home')}}" class="brand-logo right">Golden House</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
-                <li><a href="{{path('admin_property_index')}}">Tous les biens</a></li>
+                <li><a href="{{path('property_index')}}">Tous les biens</a></li>
                 <li><a href="{{path('app_login')}}">Login</a></li>
                 {% if app.user %}
                 <li class="active"><a href="{{path('app_logout')}}">Logout</a></li>
@@ -54,7 +54,7 @@
     </nav>
 
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="{{path('admin_property_index')}}">Tous les biens</a></li>
+        <li><a href="{{path('property_index')}}">Tous les biens</a></li>
         <li><a href="{{path('app_login')}}">Login</a></li>
         {% if app.user %}
         <li><a href="{{path('app_logout')}}">Logout</a></li>
