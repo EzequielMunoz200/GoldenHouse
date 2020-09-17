@@ -29,13 +29,13 @@
         <div class="col l4">{{form_row(form.postal_code)}}</div>
         <div class="col l4">{{form_row(form.is_sold)}}</div>
     </div>
+    {{form_rest(form)}}
 
-</div>{{form_widget(form)}}
 <button class="btn">{{ button_label|default('Valider') }}</button>
 {{form_start(form)}}    
 
 <a href="{{ path('admin_property_index') }}">Retourner à la liste</a>
 {# <a onclick="M.toast({html: 'I am a toast'})" class="btn">Toast!</a> #}
 {# {{ include('admin/_delete_form.html.twig') }} #}
-
+</div>
 {% endblock %}

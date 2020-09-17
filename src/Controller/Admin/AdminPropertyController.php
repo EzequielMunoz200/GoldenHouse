@@ -21,7 +21,7 @@ class AdminPropertyController extends AbstractController
      */
     public function index(PropertyRepository $propertyRepository): Response
     {
-        return $this->render('admin/index.html.twig', [
+        return $this->render('admin/property/index.html.twig', [
             'properties' => $propertyRepository->findAll(),
         ]);
     }
@@ -45,7 +45,7 @@ class AdminPropertyController extends AbstractController
             return $this->redirectToRoute('admin_property_index');
         }
 
-        return $this->render('admin/new.html.twig', [
+        return $this->render('admin/property/new.html.twig', [
             'property' => $property,
             'form' => $form->createView(),
         ]);
@@ -63,7 +63,7 @@ class AdminPropertyController extends AbstractController
                 'slug' => $propSlug,
             ], 301);
         }
-        return $this->render('property/show.html.twig', [
+        return $this->render('admin/property/show.html.twig', [
             'property' => $property,
         ]);
     }
@@ -87,9 +87,10 @@ class AdminPropertyController extends AbstractController
             return $this->redirectToRoute('admin_property_index');
         }
 
-        return $this->render('admin/edit.html.twig', [
+        return $this->render('admin/property/edit.html.twig', [
             'property' => $property,
             'form' => $form->createView(),
+            'options' => $property->getOptions()
         ]);
     }
 

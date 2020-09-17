@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Option{% endblock %}
+{% block title %}{{parent()}} - Créer une option{% endblock %}
 
 {% block body %}
 <div class="container">
-    <h1>Create new Option</h1>
+    <h1>Créer une option</h1>
 
-    {{ include('option/_form.html.twig') }}
+    {{ include('admin/option/_form.html.twig') }}
 
-    <a href="{{ path('option_index') }}">back to list</a>
+    <a href="{{ path('admin_option_index') }}">back to list</a>
 
 </div>
 

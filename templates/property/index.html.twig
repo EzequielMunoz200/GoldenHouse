@@ -12,7 +12,7 @@
                 <div class="container ">
                     <div class="row ">
                         <div class="col m6"></div>
-                        <div class="col s12 m8 ">
+                        <div class="col s12 m12 ">
                            {{form_start(form)}}
                            <div class="row">
                                <div class="col l4">
@@ -21,7 +21,10 @@
                                <div class="col l4">
                                 {{form_row(form.maxPrice)}}
                                </div>
-                           {#     {{form_reset(form)}} #}
+                               <div class="col l4">
+                                {{form_row(form.options)}}
+                               </div>
+                           
                                <div class="col l4">
                                    <button class="btn">Rechercher
                                    </button>
@@ -46,7 +49,10 @@
         {#  <a href="{{ path('property_show', {'id': property.id, slug: property.slug}) }}">show</a>
                       <a href="{{ path('admin_property_edit', {'id': property.id, slug: property.slug}) }}">edit</a> #}
         {% else %}
-        <p>no records found</p>
+        <div class="container col l4 yellow lighten-4">
+            <p class="valign-wrapper"><i class="material-icons">warning </i>&nbsp; Il n'y a pas des résultats avec cet ensemble d'options</p>
+        </div>
+        
         {% endfor %}
     </div>
     <div class="row">
