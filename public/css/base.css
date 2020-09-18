@@ -1,0 +1,59 @@
+.error {
+    color: white;
+    font-weight: bold;
+    background-color: rgb(194, 30, 30);
+    padding: 5px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.card-panel {
+    margin: 0;
+}
+
+body {
+    font-family: 'Roboto Slab', serif;
+}
+
+#logo {
+    right: 2.5rem;
+}
+
+.subtitle{
+    font-size: 15px;
+    padding-left: 10px;
+}
+
+.price{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.title-property{
+    font-size: 30px;
+}
+
+
+@media (max-width: 450px){
+    h1{
+        font-size: 2.2rem;
+        font-weight: bold;
+    }
+
+    h2{
+        font-size: 2.10rem;
+    }
+
+    .title-filter{
+        font-size: 1.5rem;
+    }
+
+    .subtitle-show{
+        font-size: 2rem;
+    }
+
+    .price-show{
+        font-size: 2rem;
+        font-weight: bold;
+    }
+}

@@ -2,11 +2,14 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Image;
 use App\Entity\Option;
 use App\Entity\Property;
 use App\Form\PropertyType;
 use App\Repository\PropertyRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,10 +22,18 @@ class AdminPropertyController extends AbstractController
     /**
      * @Route("/biens", name="property_index", methods={"GET"})
      */
-    public function index(PropertyRepository $propertyRepository): Response
+    public function index(PropertyRepository $propertyRepository, PaginatorInterface $paginator, Request $request): Response
     {
+
+        $properties = $paginator->paginate(
+            $propertyRepository->findAll(),
+            $request->query->getInt('page', 1),
+            12
+            
+        );
         return $this->render('admin/property/index.html.twig', [
-            'properties' => $propertyRepository->findAll(),
+            'properties' => $properties,
+            'current_menu' => 'index',
         ]);
     }
 
@@ -36,6 +47,21 @@ class AdminPropertyController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $images = $form->get('images')->getData();
+            foreach ($images as $image) {
+
+                $filepath = md5(uniqid()) . '.' . $image->guessExtension();
+                $image->move(
+                    $this->getParameter('app.images_dir'),
+                    $filepath
+                );
+
+                $img = new Image();
+                $img->setImgPath($filepath);
+                $property->addImage($img);
+            }
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($property);
             $entityManager->flush();
@@ -48,6 +74,7 @@ class AdminPropertyController extends AbstractController
         return $this->render('admin/property/new.html.twig', [
             'property' => $property,
             'form' => $form->createView(),
+            'action' => 'new'
         ]);
     }
 
@@ -80,6 +107,21 @@ class AdminPropertyController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $images = $form->get('images')->getData();
+            foreach ($images as $image) {
+
+                $filepath = md5(uniqid()) . '.' . $image->guessExtension();
+                $image->move(
+                    $this->getParameter('app.images_dir'),
+                    $filepath
+                );
+
+                $img = new Image();
+                $img->setImgPath($filepath);
+                $property->addImage($img);
+            }
+
+
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'Bien modifié avec success');
@@ -90,7 +132,9 @@ class AdminPropertyController extends AbstractController
         return $this->render('admin/property/edit.html.twig', [
             'property' => $property,
             'form' => $form->createView(),
-            'options' => $property->getOptions()
+            'options' => $property->getOptions(),
+            'action' => 'edit',
+            'images' => $property->getImages(),
         ]);
     }
 
@@ -108,5 +152,28 @@ class AdminPropertyController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_property_index');
+    }
+
+
+    /**
+     *@Route("/image/{id}", name="image_delete", requirements={"id"="\d+"}, methods={"DELETE"})
+     */
+    public function deleteImage(Image $image, Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        if ($this->isCsrfTokenValid('delete' . $image->getId(), $data['_token'])) {
+            $filepath = $image->getImgPath();
+
+            unlink($this->getParameter('app.images_dir') . '/' . $filepath);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($image);
+            $em->flush();
+
+            return new JsonResponse(['success' => 1]);
+        } else {
+            return new JsonResponse(['error' => 'Token Invalide'], 400);
+        }
     }
 }

@@ -42,29 +42,6 @@ class PropertyController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="property_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $property = new Property();
-        $form = $this->createForm(PropertyType::class, $property);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($property);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('property_index');
-        }
-
-        return $this->render('property/new.html.twig', [
-            'property' => $property,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/biens/{slug}-{id}", name="property_show", requirements={"slug": "[a-z0-9\-]*"}, methods={"GET"})
      */
     public function show(Property $property, $slug, $id): Response
@@ -82,37 +59,4 @@ class PropertyController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="property_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Property $property): Response
-    {
-        $form = $this->createForm(PropertyType::class, $property);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('property_index');
-        }
-
-        return $this->render('property/edit.html.twig', [
-            'property' => $property,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="property_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Property $property): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $property->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($property);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('property_index');
-    }
 }

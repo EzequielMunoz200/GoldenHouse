@@ -6,28 +6,39 @@
 
 <div class="container">
     <!-- Page Content goes here -->
+    <div class="row">
+        <h4>Administrer les biens</h4>
+    </div>
 
-    <h2>Administrer les biens</h2>
+    <div class="row">
+        <table class="table striped col s12">
+            <thead>
+                <tr>
+                    <th>Nom du bien</th>
+                    <th>Le mettre à jour</th>
+                    <th>Le supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for property in properties %}
+                <tr>
+                    <td><a
+                            href="{{path('property_show', {id: property.id, slug: property.slug }) }}">{{property.title}}</a>
+                    </td>
+                    <td><a href="{{path('admin_property_edit', {id: property.id, slug: property.slug }) }}"
+                            class="btn">Modifier</a></td>
+                    <td>{{ include('admin/property/_delete_form.html.twig') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-    <table class="table striped">
-        <thead>
-            <tr>
-                <th>Nom du bien</th>
-                <th>Mettre à jour le bien</th>
-                <th>Supprimer le bien</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for property in properties %}
-            <tr>
-                <td><a href="{{path('property_show', {id: property.id, slug: property.slug }) }}">{{property.title}}</a>
-                </td>
-                <td><a href="{{path('admin_property_edit', {id: property.id, slug: property.slug }) }}"
-                        class="btn">Modifier</a></td>
-                <td>{{ include('admin/property/_delete_form.html.twig') }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+    <div class="row">
+        <div class="navigation row center-align{# col s12 l6 #} {# offset-l4 #}">
+            {{ knp_pagination_render(properties) }}
+        </div>
+    </div>
 </div>
 {% endblock %}

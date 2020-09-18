@@ -1,0 +1,5 @@
+<a class="btn red " href="{{ path('admin_property_delete_image', {id: image.id}) }}" data-delete
+    data-token="{{ csrf_token('delete' ~ image.id) }}">Supprimer</a>
+    {{
+        dump(path('admin_property_delete_image', {'id': image.id}) )
+    }}

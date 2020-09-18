@@ -14,22 +14,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="{{asset("css/base.css")}}">
     {% endblock %}
 </head>
-<style>
-    .error {
-        color: white;
-        font-weight: bold;
-        background-color: rgb(194, 30, 30);
-        padding: 5px;
-        border-radius: 5px;
-        display: inline-block;
-    }
-
-    body {
-        font-family: 'Roboto Slab', serif;
-    }
-</style>
 
 {# read and display all flash messages #}
 {% for label, messages in app.flashes %}
@@ -39,25 +26,39 @@
     {% endfor %}
     {% endfor %}
     <nav class="nav-extended">
-        <div class="nav-wrapper light-blue darken-4">
-            <a href="{{path('home')}}" class="brand-logo right">Golden House</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul id="nav-mobile" class="left hide-on-med-and-down">
-                <li><a href="{{path('property_index')}}">Tous les biens</a></li>
-                <li><a href="{{path('app_login')}}">Login</a></li>
-                {% if app.user %}
-                <li class="active"><a href="{{path('app_logout')}}">Logout</a></li>
+        {% if app.user %}
+        <div class="nav-wrapper grey darken-4">
+            {% else %}
+            <div class="nav-wrapper light-blue darken-4">
                 {% endif %}
 
-            </ul>
-        </div>
+                <a href="{{path('home')}}" id="logo" class="brand-logo right">Golden House</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a href="{{path('property_index')}}">Nos biens à vendre</a></li>
+                    {% if app.user %}
+                    <li class="active"><a href="{{path('admin_property_index')}}">Lister tous les biens</a></li>
+                    <li class="active"><a href="{{path('admin_property_new')}}">Ajouter un bien</a></li>
+                    <li class="active"><a href="{{path('app_logout')}}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{{path('app_login')}}">Login</a></li>
+                    {% endif %}
+
+                </ul>
+            </div>
     </nav>
 
-    <ul class="sidenav" id="mobile-demo">
-        <li><a href="{{path('property_index')}}">Tous les biens</a></li>
-        <li><a href="{{path('app_login')}}">Login</a></li>
+    <ul class="sidenav light-blue darken-4" id="mobile-demo">
+        <li><a class="white-text" href="{{path('property_index')}}">Tous les biens</a></li>
+     
         {% if app.user %}
-        <li><a href="{{path('app_logout')}}">Logout</a></li>
+        <li class="divider"></li>
+        <li><a class="white-text" href="{{path('admin_property_index')}}">Lister tous les biens</a></li>
+        <li><a class="white-text" href="{{path('admin_property_new')}}">Ajouter un bien</a></li>
+        <li><a class="white-text" href="{{path('app_logout')}}">Logout</a></li>
+        {% else %}
+        <li class="divider"></li>
+        <li><a class="white-text" href="{{path('app_login')}}">Login</a></li>
         {% endif %}
     </ul>
     {% block body %}{% endblock %}

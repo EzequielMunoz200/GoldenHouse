@@ -1,7 +1,7 @@
 {#Materialize CSS#}
 {# default Sliding pagination control implementation #}
 {% if pageCount > 1 %}
-<ul class="pagination">
+<ul class="pagination col s12">
   {% if first is defined and current != first %}
   <li class="waves-effect first">
     <a href="{{ path(route, query|merge({(pageParameterName): first})) }}"><i class="material-icons">first_page</i></a>

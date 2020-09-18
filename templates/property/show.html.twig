@@ -4,47 +4,67 @@
 
 {% block body %}
 <div class="row">
-    <div class="card-panel teal lighten-4">
+    <div class="card-panel light-blue lighten-5">
+        {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{path('admin_property_edit', {id: property.id, slug: property.slug }) }}" class="btn grey darken-4"><i
+                class="material-icons left">settings</i>Modifier</a>
+        {% endif %}
+
         <div class="row">
-            <div class="container">
+            <div class="col s12 l6">
+                <img class="col s12 l12" src="{{asset("uploads/default/Finca.jpg")}}">
+            </div>
+            <div class="col s12 l6 offset">
                 <div class="row">
-                    <div class="col m6"></div>
-                    <div class="col s12 m6">
-                        <h1>{{property.title}}</h1>
-                        <h2>{{property.rooms}} pièces - {{property.surface}} m²</h2>
-                        <h2>{{property.formattedPrice}} €</h2>
-                        <a href="{{ path('property_show', {id: property.id, slug: property.slug}) }}"
-                            class="waves-effect waves-light btn"><i class="material-icons left">phone</i>Contacter
-                            l'agence</a>
-                    </div>
+                    <h1>{{property.title}}</h1>
+                    <h3 class="subtitle-show">{{property.rooms}} pièces - {{property.surface}} m²</h3>
+                    <h3 class="price-show">{{property.formattedPrice}} €</h3>
                 </div>
 
+                <div class="row">
+                    <div class="row">
+                        <div class="col s12 l4">
+                            <div class="row">
+                                <a href="tel:+330102030405" class="waves-effect waves-light btn-large col s12 l11"><i
+                                        class="material-icons left">phone</i>Appelez-nous</a>
+                            </div>
+                        </div>
+                        <div class="col s12 l4">
+                            <div class="row">
+                                <a href="mailto:goldenhouse@mail.com"
+                                    class="waves-effect waves-light btn-large col s12 l11"><i
+                                        class="material-icons left">email</i>Écrivez-nous</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-
         </div>
-
     </div>
 </div>
 <div class="container">
-    <!-- Page Content goes here -->
-    <div class="collection">
-        <p class="collection-item">{{ property.description | nl2br}}</p>
-        <a href="#!" class="collection-item active">Alvin</a>
-        <a href="#!" class="collection-item">Alvin</a>
-        <a href="#!" class="collection-item">Alvin</a>
-    </div>
     <div class="row">
-        <div class="col l6">
-            <h2>Caractéristiques</h2>
+        <div class="col s12 l12">
+            <div class="row">
+                <h5 class="col s12">Description</h5>
+            </div>
+
+            <p>{{ property.description }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 l6">
+            <div class="row">
+                <h5 class="col s12">Caractéristiques</h5>
+            </div>
+
             <table class="table striped">
                 <tbody>
                     <tr>
                         <th class="teal-text">Nom</th>
                         <td>{{ property.title }}</td>
-                    </tr>
-                    <tr>
-                        <th class="teal-text">Description</th>
-                        <td>{{ property.description }}</td>
                     </tr>
                     <tr>
                         <th class="teal-text">Surface habitable</th>
@@ -64,7 +84,7 @@
                     </tr>
                     <tr>
                         <th class="teal-text">Prix</th>
-                        <td>{{ property.price }}</td>
+                        <td>{{ property.formattedPrice }} €</td>
                     </tr>
                     <tr>
                         <th class="teal-text">Chauffage</th>
@@ -83,39 +103,38 @@
                         <td>{{ property.postalCode }}</td>
                     </tr>
                     <tr>
-                        <th class="teal-text">Is_sold</th>
-                        <td>{{ property.isSold ? 'Yes' : 'No' }}</td>
-                    </tr>
-                    <tr>
-                        <th class="teal-text">Created_at</th>
-                        <td>{{ property.createdAt ? property.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                    </tr>
-                    <tr>
-                        <th class="teal-text">Updated_at</th>
-                        <td>{{ property.updatedAt ? property.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col l6">
-            <h2>Spécifités</h2>
-            <table class="table striped">
-                <tbody>
-                    {% for option in options %}
-                    <tr>
-                        <th class="teal-text">{{option.name}}</th>
-                        <td>
-                            <i class="material-icons">check</i>
+                        <th class="teal-text">Publié le</th>
+                        <td>{{ property.createdAt ? property.createdAt|format_datetime('full', 'none', locale='fr') |default('') }}
                         </td>
-                    </tr>{% else %}
-                    <tr>
-                        <th class="teal-text"> Cette propriété n'a pas des options</th>
                     </tr>
-
-                    {% endfor %}
                 </tbody>
             </table>
         </div>
+        <div class="row">
+            <div class="col s12 l6">
+                <div class="row">
+                    <h5 class="col s12">Spécifités</h5>
+                </div>
+
+                <table class="table striped">
+                    <tbody>
+                        {% for option in options %}
+                        <tr>
+                            <th class="teal-text">{{option.name}}</th>
+                            <td>
+                                <i class="material-icons">check</i>
+                            </td>
+                        </tr>{% else %}
+                        <tr>
+                            <th class="teal-text"> Cette propriété n'a pas des options</th>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 </div>
 {% endblock %}
