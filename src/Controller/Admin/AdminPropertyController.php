@@ -98,7 +98,7 @@ class AdminPropertyController extends AbstractController
     /**
      * @Route("/property/{slug}-{id}/edit", name="property_edit", requirements={"slug": "[a-z0-9\-]*"}, methods={"GET","POST"})
      */
-    public function edit(Request $request, Property $property): Response
+    public function edit(Request $request, Property $property, $slug, $id): Response
     {
         /* $option = new Option();
         $property->addOption($option); */
@@ -126,7 +126,7 @@ class AdminPropertyController extends AbstractController
 
             $this->addFlash('success', 'Bien modifié avec success');
 
-            return $this->redirectToRoute('admin_property_index');
+            return $this->redirectToRoute('property_show', ['slug' => $slug, 'id' => $id]);
         }
 
         return $this->render('admin/property/edit.html.twig', [

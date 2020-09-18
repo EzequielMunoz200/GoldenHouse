@@ -2,3 +2,19 @@
 liip_imagine:
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "gd"
+    filter_sets:
+        landscape_show:
+            quality: 75
+            filters:
+                thumbnail:
+                    size:  [600, 360]
+                    mode:  outbound
+
+        edit_page:
+            quality: 75
+            filters:
+                thumbnail:
+                    size:  [400, 400]
+                    mode:  outbound
+
+          

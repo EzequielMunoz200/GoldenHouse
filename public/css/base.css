@@ -13,47 +13,78 @@
 
 body {
     font-family: 'Roboto Slab', serif;
+    height: 100vh;
+}
+
+#icon-place {
+    color: #26a69a;
+}
+
+.container {
+    height: 85%;
 }
 
 #logo {
     right: 2.5rem;
 }
 
-.subtitle{
+.subtitle {
     font-size: 15px;
     padding-left: 10px;
 }
 
-.price{
+.price {
     font-size: 30px;
     font-weight: bold;
 }
 
-.title-property{
+
+.title-property {
     font-size: 30px;
 }
 
+@media (min-width: 992px) {
+.indicators {
+    bottom: 22px!important;
+}
+}
 
-@media (max-width: 450px){
-    h1{
+@media (max-width: 450px) {
+    h1 {
         font-size: 2.2rem;
         font-weight: bold;
     }
 
-    h2{
+    h2 {
         font-size: 2.10rem;
     }
 
-    .title-filter{
+    .title-filter {
         font-size: 1.5rem;
     }
 
-    .subtitle-show{
+    .subtitle-show {
         font-size: 2rem;
     }
 
-    .price-show{
+    .price-show {
         font-size: 2rem;
         font-weight: bold;
+    }
+
+    .carousel {
+        height: 195px;
+    }
+
+    .carousel.carousel-slider .carousel-item {
+        min-height: unset;
+    }
+
+    .sidenav li>a{
+        font-size: 17px;
+    }
+
+    .page-edit-picture{
+        margin-bottom: 10px;
     }
 }

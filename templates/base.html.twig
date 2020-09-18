@@ -25,40 +25,44 @@
 <body onload="M.toast({html: '{{message}}', classes: '{{label}}'})">
     {% endfor %}
     {% endfor %}
-    <nav class="nav-extended">
-        {% if app.user %}
-        <div class="nav-wrapper grey darken-4">
-            {% else %}
-            <div class="nav-wrapper light-blue darken-4">
-                {% endif %}
-
-                <a href="{{path('home')}}" id="logo" class="brand-logo right">Golden House</a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    <li><a href="{{path('property_index')}}">Nos biens à vendre</a></li>
-                    {% if app.user %}
-                    <li class="active"><a href="{{path('admin_property_index')}}">Lister tous les biens</a></li>
-                    <li class="active"><a href="{{path('admin_property_new')}}">Ajouter un bien</a></li>
-                    <li class="active"><a href="{{path('app_logout')}}">Logout</a></li>
-                    {% else %}
-                    <li><a href="{{path('app_login')}}">Login</a></li>
+    <div class="navbar-fixed">
+        <nav class="nav-extended">
+            {% if app.user %}
+            <div class="nav-wrapper grey darken-4">
+                {% else %}
+                <div class="nav-wrapper light-blue darken-4">
                     {% endif %}
 
-                </ul>
-            </div>
-    </nav>
+                    <a href="{{path('home')}}" id="logo" class="brand-logo right">Golden House</a>
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <ul id="nav-mobile" class="left hide-on-med-and-down">
+                        <li><a href="{{path('property_index')}}">Nos biens à vendre</a></li>
+                        {% if app.user %}
+                        <li class="active"><a href="{{path('admin_property_index')}}">Lister tous les biens</a></li>
+                        <li class="active"><a href="{{path('admin_property_new')}}">Ajouter un bien</a></li>
+                        <li class="active"><a href="{{path('app_logout')}}">Se déconnecter</a></li>
+                        {% else %}
+                        <li><a href="{{path('app_login')}}">Se connecter</a></li>
+                        {% endif %}
 
-    <ul class="sidenav light-blue darken-4" id="mobile-demo">
-        <li><a class="white-text" href="{{path('property_index')}}">Tous les biens</a></li>
-     
+                    </ul>
+                </div>
+        </nav>
+    </div>
+
+    <ul class="sidenav grey lighten-5" id="mobile-demo">
+        <li><a class="black-text" href="{{path('property_index')}}">Tous les biens</a></li>
+
         {% if app.user %}
         <li class="divider"></li>
-        <li><a class="white-text" href="{{path('admin_property_index')}}">Lister tous les biens</a></li>
-        <li><a class="white-text" href="{{path('admin_property_new')}}">Ajouter un bien</a></li>
-        <li><a class="white-text" href="{{path('app_logout')}}">Logout</a></li>
+        <li><a class="black-text" href="{{path('admin_property_index')}}">Lister tous les biens</a></li>
+        <li class="divider"></li>
+        <li><a class="black-text" href="{{path('admin_property_new')}}">Ajouter un bien</a></li>
+        <li class="divider"></li>
+        <li><a class="black-text" href="{{path('app_logout')}}">Se déconnecter</a></li>
         {% else %}
         <li class="divider"></li>
-        <li><a class="white-text" href="{{path('app_login')}}">Login</a></li>
+        <li><a class="black-text" href="{{path('app_login')}}">Se connecter</a></li>
         {% endif %}
     </ul>
     {% block body %}{% endblock %}
@@ -73,6 +77,16 @@
             var elems = document.querySelectorAll('select');
             var instances = M.FormSelect.init(elems);
         });
+
+        //images slider
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.carousel');
+            var instances = M.Carousel.init(elems, {indicators: true});
+          });
+        
+        var instance = M.Carousel.init({
+            fullWidth: true
+          });
 
     </script>
     <!-- Compiled and minified JavaScript -->
