@@ -19,8 +19,8 @@ class Property
 {
 
     const HEAT = [
-        0 => 'Electric',
-        1 => 'Gas'
+        0 => 'Électrique',
+        1 => 'Gaz'
     ];
 
     /**
@@ -63,6 +63,9 @@ class Property
 
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 5)
      */
     private $floor;
 

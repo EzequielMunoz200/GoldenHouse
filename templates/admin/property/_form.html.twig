@@ -32,7 +32,7 @@
 <div class="row">
 {% for image in property.images %}
 {# <div class="row"> #}
-    <div class="col s4 m3 page-edit-picture">
+    <div class="col s4 m3 l2 page-edit-picture">
         <div class="card">
             <div class="card-image">
                 <img src="{{asset('/uploads/' ~ image.imgPath)| imagine_filter('edit_page') }}">

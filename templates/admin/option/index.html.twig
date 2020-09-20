@@ -4,36 +4,42 @@
 
 {% block body %}
 <div class="container">
+    <div class="row">
+        <h4>Liste des options</h4>
+    </div>
 
-    <h1>Liste des options</h1>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Option</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for option in options %}
+                <tr>
+                    <td>{{ option.id }}</td>
+                    <td>{{ option.name }}</td>
+                    <td>
+                        <a href="{{ path('admin_option_show', {'id': option.id}) }}">Afficher</a>
+                        <a href="{{ path('admin_option_edit', {'id': option.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for option in options %}
-            <tr>
-                <td>{{ option.id }}</td>
-                <td>{{ option.name }}</td>
-                <td>
-                    <a href="{{ path('admin_option_show', {'id': option.id}) }}">show</a>
-                    <a href="{{ path('admin_option_edit', {'id': option.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        <a href="{{ path('admin_option_new') }}">Créer une option</a>
+    </div>
 
-    <a href="{{ path('admin_option_new') }}">Create new</a>
 </div>
-  
+
 {% endblock %}

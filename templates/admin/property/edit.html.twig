@@ -8,29 +8,30 @@
     <div class="row">
         <h4>Modifier le bien</h4>
     </div>
-   
+
     <div class="row">
         {{ include('admin/property/_form.html.twig') }}
     </div>
     <div class="row">
-        <a class="valign-wrapper" href="{{ path('admin_property_index') }}"><i class="left material-icons">backspace</i>Retourner à la liste</a>
+        <a class="valign-wrapper" href="{{ path('admin_property_index') }}"><i
+                class="left material-icons">backspace</i>Retourner à la liste</a>
     </div>
-  
+
 </div>
 
 <script>
     window.onload = () => {
         let linksDelete = document.querySelectorAll('[data-delete]')
         console.log(linksDelete);
-    
-    
+
+
         for (link of linksDelete) {
             link.addEventListener('click', function (evt) {
                 evt.preventDefault();
                 if (confirm('Are you sure you want to delete this item?')) {
                     let url = this.getAttribute("href");
                     let token = this.dataset.token;
-    
+
                     fetch(url, {
                         method: 'DELETE',
                         headers: {
@@ -40,18 +41,17 @@
                         body: JSON.stringify({ "_token": token })
                     }).then(
                         response => response.json()
-    
+
                     ).then(data => {
                         (data.success) ? this.parentElement.remove() : alert(data.error);
                     }).catch(e => alert(e))
                 }
             });
         }
-    
+
     }
-    
-    
-    
+
+
 </script>
 {# {% block javascripts %}
    

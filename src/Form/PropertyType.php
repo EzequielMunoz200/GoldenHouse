@@ -14,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\Image;
 
 class PropertyType extends AbstractType
 {
@@ -42,15 +44,30 @@ class PropertyType extends AbstractType
             ->add('options', EntityType::class, [
                 'class' => Option::class,
                 'choice_label' => 'name',
-                'multiple' => true
+                'multiple' => true,
+                'required' => false,
+                'row_attr' => [
+                    'required' => 'none',
+                ],
             ])
             ->add('images', FileType::class, [
                 'mapped' => false,
                 'multiple' => true,
                 'required' => false,
-                'label' => false
-            ])
-        ;
+                'label' => false,
+                'constraints' => [
+                    //upload multiple
+                    new All([
+                        new Image([
+                            'mimeTypes' => 'image/jpeg',
+                            'maxSize' => '1024k',
+                            //requires PHP GD extension
+                            'detectCorrupted' => true
+                        ])
+                    ])
+
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -70,5 +87,5 @@ class PropertyType extends AbstractType
             $output[$v] = $k;
         }
         return $output;
-    } 
+    }
 }

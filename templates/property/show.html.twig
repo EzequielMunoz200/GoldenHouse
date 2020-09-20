@@ -11,22 +11,32 @@
                 class="btn-small grey darken-4"><i class="material-icons left">settings</i>Mettre à jour</a>
             {% endif %}
         </div>
-        <div class="row {# valign-wrapper #}">
+        <div class="row">
             <div class="col s12 l4">
                 <div class="carousel carousel-slider col s12 l12 offset-l5">
-                    <a class="carousel-item" href="#one!"><img src="{{asset("uploads/default/Finca.jpg") | imagine_filter('landscape_show') }}"></a>
-                    <a class="carousel-item" href="#two!"><img src="{{asset("uploads/aa6b368eec24658045a5e84d79bdf79d.jpeg") | imagine_filter('landscape_show') }}"></a>
-                    <a class="carousel-item" href="#three!"><img src="{{asset("uploads/de19255457d228329c92fdc5513634bf.jpeg") | imagine_filter('landscape_show') }}"></a>
-                    <a class="carousel-item" href="#four!"><img src="{{asset("uploads/default/Finca.jpg") | imagine_filter('landscape_show') }}"></a>
-                  </div>
-                {# <img class="col s12 l12" src="{{asset("uploads/default/Finca.jpg")}}"> #}{# | imagine_filter('landscape_show')  #}
+                    {% if property.images is not empty %}
+                    {% for image in property.images %}
+                    <a class="carousel-item" href="#one!"><img
+                            src="{{asset("uploads/" ~ image.imgPath) | imagine_filter('landscape_show') }}"></a>
+                    {% endfor %}
+
+                    {% else %}
+                    <a class="carousel-item" href="#one!"><img
+                            src="{{asset("uploads/default/Finca.jpg") | imagine_filter('landscape_show') }}"></a>
+                    <a class="carousel-item" href="#two!"><img
+                            src="{{asset("uploads/aa6b368eec24658045a5e84d79bdf79d.jpeg") | imagine_filter('landscape_show') }}"></a>
+                    <a class="carousel-item" href="#three!"><img
+                            src="{{asset("uploads/de19255457d228329c92fdc5513634bf.jpeg") | imagine_filter('landscape_show') }}"></a>
+                    {% endif %}
+                </div>
             </div>
             <div class="col s12 l6 offset-l2">
                 <div class="row">
                     <h1>{{property.title}}</h1>
                     <h3 class="subtitle-show">{{property.rooms}} pièces - {{property.surface}} m²</h3>
                     <h3 class="price-show">{{property.formattedPrice}} €</h3>
-                    <h5 class="price-show valign-wrapper"><i id="icon-place" class="material-icons left">location_on</i>{{property.city}}</h5>
+                    <h5 class="price-show valign-wrapper"><i id="icon-place"
+                            class="material-icons left">location_on</i>{{property.city}}</h5>
                 </div>
 
                 <div class="row">
@@ -45,7 +55,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -87,7 +96,7 @@
                         <td>{{ property.bedrooms }}</td>
                     </tr>
                     <tr>
-                        <th class="teal-text">Étage</th>
+                        <th class="teal-text">Nombre d'étages</th>
                         <td>{{ property.floor }}</td>
                     </tr>
                     <tr>
@@ -134,7 +143,7 @@
                             </td>
                         </tr>{% else %}
                         <tr>
-                            <th class="teal-text"> Cette propriété n'a pas des options</th>
+                            <th class="teal-text"> Cette propriété n'a pas d'options</th>
                         </tr>
 
                         {% endfor %}
@@ -145,12 +154,15 @@
 
     </div>
     <div class="row">
-        <a class="valign-wrapper" href="{{ path('admin_property_index') }}"><i class="left material-icons">backspace</i>Retourner à la liste</a>
+        {% if is_granted("ROLE_ADMIN") %}
+        <a class="valign-wrapper" href="{{ path('admin_property_index') }}"><i
+                class="left material-icons">backspace</i>Retourner à la liste</a>
+        {% else %}
+        <a class="valign-wrapper" href="{{ path('property_index') }}"><i
+                class="left material-icons">backspace</i>Retourner à la liste</a>
+        {% endif %}
+
     </div>
 </div>
 
-
-<script>
-   
-</script>
 {% endblock %}

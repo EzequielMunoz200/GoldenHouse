@@ -4,13 +4,30 @@
 
 {% block body %}
 <div class="container">
-    <h1>Modifier l'option</h1>
+    <div class="row">
+        <div class="col s12 l5 offset-l3">
 
-    {{ include('admin/option/_form.html.twig', {'button_label': 'Update'}) }}
+            <div class="row">
+                <h4>Modifier l'option</h4>
+            </div>
+            <div class="row">
+                <a class="valign-wrapper right" href="{{ path('admin_option_index') }}"><i
+                        class="left material-icons">backspace</i>Retourner à la liste</a>
+            </div>
 
-    <a href="{{ path('admin_option_index') }}">back to list</a>
+            <div class="row">
+                {{ include('admin/option/_form.html.twig', {'button_label': 'Valider'}) }}
+            </div>
 
-    {{ include('admin/option/_delete_form.html.twig') }}
+
+
+
+            <div class="row">
+                {{ include('admin/option/_delete_form.html.twig') }}
+            </div>
+        </div>
+
+    </div>
 </div>
- 
+
 {% endblock %}

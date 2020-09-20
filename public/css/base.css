@@ -16,6 +16,10 @@ body {
     height: 100vh;
 }
 
+.slogan{
+    line-height: 1.5;
+}
+
 #icon-place {
     color: #26a69a;
 }
@@ -44,9 +48,17 @@ body {
 }
 
 @media (min-width: 992px) {
-.indicators {
-    bottom: 22px!important;
-}
+    .indicators {
+        bottom: 22px !important;
+    }
+
+    h1{
+        font-size: 3.2rem;
+    }
+
+    h2{
+        font-size: 2.8rem;
+    }
 }
 
 @media (max-width: 450px) {
@@ -80,11 +92,20 @@ body {
         min-height: unset;
     }
 
-    .sidenav li>a{
+    .sidenav li>a {
         font-size: 17px;
     }
 
-    .page-edit-picture{
+    .page-edit-picture {
         margin-bottom: 10px;
     }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6, #logo, a.nav {
+    font-family: 'Libre Baskerville', serif;
 }
