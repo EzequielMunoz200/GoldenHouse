@@ -16,17 +16,17 @@
                 <div class="carousel carousel-slider col s12 l12 offset-l5">
                     {% if property.images is not empty %}
                     {% for image in property.images %}
-                    <a class="carousel-item" target="_blank" href="{{asset("uploads/" ~ image.imgPath) }}"><img
-                            src="{{asset("uploads/" ~ image.imgPath) | imagine_filter('landscape_show') }}"></a>
+                    <a class="carousel-item" target="_blank" href="{{asset("uploads/images/" ~ image.imgPath) }}"><img
+                            src="{{asset("uploads/images/" ~ image.imgPath) | imagine_filter('landscape_show') }}"></a>
                     {% endfor %}
 
                     {% else %}
-                    <a class="carousel-item" target="_blank" href="{{asset("uploads/default/Finca.jpg") }}"><img
-                            src="{{asset("uploads/default/Finca.jpg") | imagine_filter('landscape_show') }}"></a>
-                    <a class="carousel-item" target="_blank" href="{{asset("uploads/aa6b368eec24658045a5e84d79bdf79d.jpeg")}}"><img
-                            src="{{asset("uploads/aa6b368eec24658045a5e84d79bdf79d.jpeg") | imagine_filter('landscape_show') }}"></a>
-                    <a class="carousel-item" target="_blank" href="{{asset("uploads/de19255457d228329c92fdc5513634bf.jpeg")}}"><img
-                            src="{{asset("uploads/de19255457d228329c92fdc5513634bf.jpeg") | imagine_filter('landscape_show') }}"></a>
+                    <a class="carousel-item" target="_blank" href="{{asset("uploads/images/default/Finca.jpg") }}"><img
+                            src="{{asset("uploads/images/default/Finca.jpg") | imagine_filter('landscape_show') }}"></a>
+                    <a class="carousel-item" target="_blank" href="{{asset("uploads/images/aa6b368eec24658045a5e84d79bdf79d.jpeg")}}"><img
+                            src="{{asset("uploads/images/aa6b368eec24658045a5e84d79bdf79d.jpeg") | imagine_filter('landscape_show') }}"></a>
+                    <a class="carousel-item" target="_blank" href="{{asset("uploads/images/de19255457d228329c92fdc5513634bf.jpeg")}}"><img
+                            src="{{asset("uploads/images/de19255457d228329c92fdc5513634bf.jpeg") | imagine_filter('landscape_show') }}"></a>
                     {% endif %}
                 </div>
             </div>

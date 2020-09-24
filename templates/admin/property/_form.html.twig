@@ -35,7 +35,7 @@
     <div class="col s4 m3 l2 page-edit-picture">
         <div class="card">
             <div class="card-image">
-                <img src="{{asset('/uploads/' ~ image.imgPath)| imagine_filter('edit_page') }}">
+                <img src="{{asset('/uploads/images/' ~ image.imgPath)| imagine_filter('edit_page') }}">
                 <a href="{{ path("admin_image_delete", {id: image.id}) }}"
                     class="btn-floating halfway-fab waves-effect waves-light red" data-delete
                     data-token="{{ csrf_token('delete' ~ image.id) }}"><i class="tiny material-icons">delete</i></a>
