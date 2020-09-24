@@ -21,6 +21,6 @@
 /public/media/cache/
 ###< liip/imagine-bundle ###
 
-/public/uploads/
+/public/uploads
 
 ngrok
