@@ -24,4 +24,3 @@ Quelques fonctionnalités :
 
 Je fais ce projet pour développer des compétences avec le framework Symfony.
 
-Je continue à ajouter de fonctionnalités sur ce projet.
